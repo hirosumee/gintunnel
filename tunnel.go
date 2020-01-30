@@ -1,0 +1,5 @@
+package gintunnel
+
+func NewTunnel()  {
+
+}
