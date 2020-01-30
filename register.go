@@ -60,6 +60,7 @@ func (r *Register) handleConnection(conn *RegisterConn) {
 				ok := r.fm.set(data, addr[:i])
 				if ok {
 					//assign hostname to conn
+					logrus.Infof("registered %s with %s", data, addr[:i])
 					conn.hostname = data
 					conn.Write([]byte("REG-RES success\r\n"))
 				} else {

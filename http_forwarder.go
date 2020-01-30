@@ -32,11 +32,12 @@ func (f *Forwarder) listen(lis net.Listener) {
 	}
 }
 func (f *Forwarder) handleConn(clientConn net.Conn) {
-	buf := make([]byte, 100)
+	buf := make([]byte, 2*1024)
 	clientConn.Read(buf)
 	ok, host := getHostName(string(buf))
 	if !ok {
-		logrus.Info("cant found hostname in header")
+		logrus.Error("cant found hostname in header")
+		logrus.Error(string(buf))
 		return
 	}
 	svAddr := f.register.getSvAddr(host)
