@@ -1,6 +1,25 @@
 {
 	"comment": "",
 	"ignore": "test",
-	"package": [],
+	"package": [
+		{
+			"checksumSHA1": "Aulh7C5SVOA4Jzt5eHNH6197Mbk=",
+			"path": "github.com/konsorten/go-windows-terminal-sequences",
+			"revision": "f55edac94c9bbba5d6182a4be46d86a2c9b5b50e",
+			"revisionTime": "2019-02-26T22:47:05Z"
+		},
+		{
+			"checksumSHA1": "a+HW4KfxlTA1ExAUrW8w6EKYoxM=",
+			"path": "github.com/sirupsen/logrus",
+			"revision": "67a7fdcf741f4d5cee82cb9800994ccfd4393ad0",
+			"revisionTime": "2019-10-26T11:39:18Z"
+		},
+		{
+			"checksumSHA1": "6df+E+onmyVik8ZC8KO535utFYg=",
+			"path": "golang.org/x/sys/unix",
+			"revision": "9fbb57f87de9ccfe3a99d4e3270ce8a926ebba4f",
+			"revisionTime": "2020-01-24T16:31:26Z"
+		}
+	],
 	"rootPath": "gintunnel"
 }
