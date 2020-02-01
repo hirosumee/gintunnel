@@ -36,17 +36,20 @@ func (f *Forwarder) handleConn(clientConn net.Conn) {
 	clientConn.Read(buf)
 	ok, host := getHostName(string(buf))
 	if !ok {
+		sendError(clientConn)
 		logrus.Error("cant found hostname in header")
 		logrus.Error(string(buf))
 		return
 	}
 	svAddr := f.register.getSvAddr(host)
 	if svAddr == "" {
+		sendError(clientConn)
 		logrus.Infof("can't found server address for %s", host)
 		return
 	}
 	svConn, err := net.Dial("tcp", fmt.Sprintf("%v:8082", svAddr))
 	if err != nil {
+		sendError(clientConn)
 		logrus.Error(err)
 		return
 	}
@@ -73,4 +76,11 @@ func getHostName(str string) (bool, string) {
 		return false, ""
 	}
 	return true, strings.Trim(str2[:endLineIndex], "\r\n")
+}
+
+func sendError(conn net.Conn) {
+	conn.Write([]byte("HTTP/1.1 503 Service Unavailable Error\r\n\r\n"))
+	conn.Write([]byte("Try later..."))
+	conn.Write([]byte("\r\n"))
+	conn.Close()
 }
